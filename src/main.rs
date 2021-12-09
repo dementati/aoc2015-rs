@@ -1,5 +1,5 @@
-mod common;
 mod day16;
+mod day17;
 
 use std::env;
 use std::fs;
@@ -30,9 +30,10 @@ fn run(day_number: u8, part_number: u8, maybe_file: Option<&String>) {
     }
 }
 
-fn create_puzzle(day_number: u8, part_number: u8) -> Puzzle<String, i32> {
+fn create_puzzle(day_number: u8, part_number: u8) -> Puzzle<String, i128> {
     match day_number {
         16 => Puzzle::new(part_number, day16::solver(part_number)),
+        17 => Puzzle::new(part_number, day17::solver(part_number)),
         _ => panic!("Unknown day!"),
     }
 }
