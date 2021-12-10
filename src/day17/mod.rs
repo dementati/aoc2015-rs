@@ -1,4 +1,5 @@
 use itertools::Itertools;
+#[macro_use] extern crate maplit;
 
 pub fn solver(star: u8) -> fn(String) -> i128 {
     match star {
