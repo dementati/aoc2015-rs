@@ -9,25 +9,15 @@ pub fn solver(star: u8) -> fn(String) -> i128 {
 }
 
 fn star1(input: String) -> i128 {
+    get_combinations(&input).len() as i128
+}
+
+fn get_combinations(input: &str) -> Vec<Vec<i128>> {
     let c: Vec<i128> = input.split_whitespace()
         .map(|s| s.parse().unwrap())
         .collect();
 
     (1..=c.len())
-        .flat_map(|i| 
-            c.iter().combinations(i)
-                .map(|c| c.iter().copied().sum::<i128>())
-        )
-        .filter(|&s| s == 150)
-        .count() as i128
-}
-
-fn star2(input: String) -> i128 {
-    let c: Vec<i128> = input.split_whitespace()
-        .map(|s| s.parse().unwrap())
-        .collect();
-
-    let result: Vec<Vec<i128>> = (1..=c.len())
         .flat_map(|i| 
             c.iter().combinations(i)
                 .map(|c| 
@@ -37,14 +27,13 @@ fn star2(input: String) -> i128 {
                 )
         )
         .filter(|s| s.iter().sum::<i128>() == 150)
-        .collect();
+        .collect()
+}
 
-    let m = result.iter()
-        .map(|p| p.len())
-        .min()
-        .unwrap();
-
+fn star2(input: String) -> i128 {
+    let result = get_combinations(&input);
+    let min = result.iter().map(|p| p.len()).min().unwrap();
     result.iter()
-        .filter(|p| p.len() == m)
+        .filter(|p| p.len() == min)
         .count() as i128
 }
